@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Share2, Download, ImageIcon } from "lucide-react";
 import { toast } from "sonner";
-import html2canvas from "html2canvas";
 import { getNameFontClass, NAME_FONT_OPTIONS } from "@/lib/nameFont";
 import type { NameDisplayFont } from "@/contexts/ProfileContext";
 
@@ -53,6 +52,7 @@ export function ShareCard({
   const handleExport = useCallback(async () => {
     if (!cardRef.current) return;
     try {
+      const { default: html2canvas } = await import("html2canvas");
       const canvas = await html2canvas(cardRef.current, {
         scale: exportScale,
         useCORS: true,
@@ -77,6 +77,7 @@ export function ShareCard({
       return;
     }
     try {
+      const { default: html2canvas } = await import("html2canvas");
       const canvas = await html2canvas(cardRef.current, {
         scale: exportScale,
         useCORS: true,
